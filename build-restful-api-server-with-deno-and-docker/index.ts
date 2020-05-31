@@ -42,40 +42,35 @@ const parseRequestBody = async <T>(req: ServerRequest): Promise<T> => {
   return JSON.parse(str) as T;
 };
 
-const start = async () => {
-  // server listens on localhost:4040
-  const app = serve({ port: 4040 });
+const app = serve({ port: 4040 });
 
-  for await (const req of app) {
-    switch (req.url) {
-      case "/user": {
-        switch (req.method) {
-          case "POST": {
-            const newUser = await parseRequestBody<User>(req);
-            addUser(newUser);
-            respondWithBody(req, true);
-            break;
-          }
-          default:
-            respondNotFound(req);
+for await (const req of app) {
+  switch (req.url) {
+    case "/user": {
+      switch (req.method) {
+        case "POST": {
+          const newUser = await parseRequestBody<User>(req);
+          addUser(newUser);
+          respondWithBody(req, true);
+          break;
         }
-        break;
+        default:
+          respondNotFound(req);
       }
-      case "/users": {
-        switch (req.method) {
-          case "GET": {
-            respondWithBody<User[]>(req, listUsers());
-            break;
-          }
-          default:
-            respondNotFound(req);
-        }
-        break;
-      }
-      default:
-        respondNotFound(req);
+      break;
     }
+    case "/users": {
+      switch (req.method) {
+        case "GET": {
+          respondWithBody<User[]>(req, listUsers());
+          break;
+        }
+        default:
+          respondNotFound(req);
+      }
+      break;
+    }
+    default:
+      respondNotFound(req);
   }
-};
-
-start();
+}
