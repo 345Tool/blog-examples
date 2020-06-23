@@ -1,18 +1,16 @@
 {
-  "name": "cypress-e2e-demo",
+  "name": "e2e-test-nodejs-website-with-docker-cypress-and-github-actions",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "e2e": "cypress open"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "cypress": "^4.5.0",
-    "express": "^4.17.1",
-    "whatwg-fetch": "^3.0.0"
+    "cypress": "^4.9.0",
+    "express": "^4.17.1"
   }
 }
