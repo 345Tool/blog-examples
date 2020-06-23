@@ -1,0 +1,29 @@
+name: E2E Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  e2e:
+
+    runs-on: ubuntu-16.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm i
+
+      - name: Run Cypress
+          uses: cypress-io/github-action@v2
+          with:
+            start: npm run start
